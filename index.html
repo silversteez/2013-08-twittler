@@ -16,22 +16,39 @@
     </div>
     <div class="space"></div>
 
-    <div class="main"></div>
+    <div class="main">
+      <div class="refresh">Refresh Tweets</div>
+      <div class="tweets">
+      </div>
+    </div>
 
     <div class="footer">this is a footer!</div>
 
     <script>
 
       $(document).ready(function(){
-        var $body = $('.main');
-        //$body.html('');
+        
+        var $tweets = $('.tweets');
 
+        function buildTweet(theTweet) {
+          var $tweet = $('<div class="tweet"></div>');
+          var $user = $('<div class="user"></div>');
+          var $message = $('<div class="message"></div>');
+          var $timestamp = $('<div class="timestamp"></div>');
+          $user.text('@' + theTweet.user)
+          $message.text(theTweet.message);
+          $timestamp.text(theTweet.created_at);
+          $user.appendTo($tweet);
+          $message.appendTo($tweet);
+          $timestamp.appendTo($tweet);
+          return $tweet;
+        };
+
+        <!-- Add iniital tweets to the page -->
         var index = streams.home.length - 1;
         while(index >= 0){
           var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
-          $tweet.appendTo($body);
+          buildTweet(tweet).appendTo($tweets);
           index -= 1;
         }
 
