@@ -4,6 +4,7 @@
     <link href="styles.css" rel="stylesheet"></link>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <script src="moment.min.js"></script>
   </head>
   <body>
 
@@ -35,9 +36,11 @@
           var $user = $('<div class="user"></div>');
           var $message = $('<div class="message"></div>');
           var $timestamp = $('<div class="timestamp"></div>');
+          var momentTimestamp = moment(theTweet.created_at);
+          var coolTimestamp = moment(momentTimestamp).fromNow();
           $user.text('@' + theTweet.user)
           $message.text(theTweet.message);
-          $timestamp.text(theTweet.created_at);
+          $timestamp.text(coolTimestamp);
           $user.appendTo($tweet);
           $message.appendTo($tweet);
           $timestamp.appendTo($tweet);
