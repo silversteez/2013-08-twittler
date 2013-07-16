@@ -42,7 +42,7 @@ body {
 	background-color: #d4c9d6;
 }
 .disabled:hover {
-	background-color: #ecc9f2;
+	background-color: #ff7cf5;
 }
 .enabled {
 	background-color: #feb718;
@@ -67,7 +67,7 @@ body {
 	font-size: 15px;
 }
 .main .refresh:hover {
-	background-color: #d1bdd4;
+	background-color: #ff7cf5;
 	}
 
 ul {
@@ -98,6 +98,9 @@ ul {
 	color: #6f5c71;
 	font-weight: bold;
 }
+.user:hover {
+	color: #ff00ec;
+}
 
 .message {
 	position: absolute;
@@ -110,6 +113,20 @@ ul {
 	position: absolute;
 	right: 10px;
 	bottom: 10px;
+}
+
+.user-popup {
+	display: none;
+	position: fixed;
+	top:50%;
+	left:10%;
+	width:50%;
+	height:10%;
+	background-color: #77d286;
+	box-shadow: 2px 2px 20px #000;
+	margin-left: auto;
+	margin-right: auto;
+	z-index: 2; 
 }
 
 .footer {

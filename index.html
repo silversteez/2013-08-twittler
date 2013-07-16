@@ -7,7 +7,7 @@
     <script src="moment.min.js"></script>
   </head>
   <body>
-
+    <div class="user-popup"></div>
     <div class="header">
       <ul class="nav">
         <li>test 1</li>
@@ -20,8 +20,8 @@
 
     <div class="main">
       <div class="refresh">REFRESH DEM TWEETS</div>
-      <div class="tweets">
-      </div>
+      <div class="userName"></div>
+      <div class="tweets"></div>
     </div>
 
     <div class="footer">this is a footer!</div>
@@ -43,6 +43,9 @@
           var momentTimestamp = moment(theTweet.created_at);
           var coolTimestamp = moment(momentTimestamp).fromNow();
           $user.text('@' + theTweet.user)
+          $user.on("click", function() {
+            showUserTweets(theTweet.user);
+          });
           $message.text(theTweet.message);
           $timestamp.text(coolTimestamp);
           $user.appendTo($tweet);
@@ -51,19 +54,25 @@
           return $tweet;
         };
 
-        function addInitialTweets () {
+        function addTweets (user) {
           var index = streams.home.length - 1;
           lastDisplayedIndex = index;
 
           while(index >= 0) {
             var tweet = streams.home[index];
-            buildTweet(tweet).prependTo($tweets);
+            if (user === undefined) {
+              buildTweet(tweet).appendTo($tweets);
+            } else {
+              if (user === tweet.user) {
+                buildTweet(tweet).appendTo($tweets);
+              }
+            }
             index -= 1;
           }
-          $(".tweet").show(); //tweets initially set to display:none
+          $(".tweet").fadeIn("fast"); //tweets initially set to display:none
         };
 
-        function  addNewTweets() {
+        function addNewTweets() {
           var index = lastDisplayedIndex + 1;
           var length = streams.home.length;
 
@@ -73,9 +82,16 @@
             lastDisplayedIndex = index;
             index += 1;
           } 
-
           displayTweets(); 
-        }        
+        }  
+
+        function showUserTweets(user) {
+          //clear fade and delete tweets
+          $(".tweet").fadeOut("fast", function() {
+            $(".tweets").empty();
+            addTweets(user);
+          });
+        }      
 
         function refreshTweets() {
           addNewTweets();
@@ -99,8 +115,9 @@
 
         $('.refresh').on("click", refreshTweets);
         $(".auto-update").on("click", toggleAutoUpdate);
-        
-        addInitialTweets();
+
+
+        addTweets();
 
       });
 
