@@ -51,29 +51,34 @@
           return $tweet;
         };
 
-        function addNewTweets (isFirstTime) {
+        function addInitialTweets () {
           var index = streams.home.length - 1;
-          var tempIndex = index;
+          lastDisplayedIndex = index;
 
           while(index >= 0) {
             var tweet = streams.home[index];
-            
-            if (!isFirstTime) { //if we're adding the newest tweets...
-              if (index > lastDisplayedIndex) {//only add the new tweets
-                buildTweet(tweet).prependTo($tweets);
-              }
-            } else { //if it's the first time keep it simple, add all
-              buildTweet(tweet).prependTo($tweets);
-            }
+            buildTweet(tweet).prependTo($tweets);
             index -= 1;
           }
-
-          lastDisplayedIndex = tempIndex;
-          displayTweets();
+          $(".tweet").show(); //tweets initially set to display:none
         };
 
+        function  addNewTweets() {
+          var index = lastDisplayedIndex + 1;
+          var length = streams.home.length;
+
+          while (index < length) {
+            var tweet = streams.home[index];
+            buildTweet(tweet).prependTo($tweets);
+            lastDisplayedIndex = index;
+            index += 1;
+          } 
+
+          displayTweets(); 
+        }        
+
         function refreshTweets() {
-          addNewTweets(false);
+          addNewTweets();
         };
 
         function displayTweets() {
@@ -95,7 +100,7 @@
         $('.refresh').on("click", refreshTweets);
         $(".auto-update").on("click", toggleAutoUpdate);
         
-        addNewTweets(true);
+        addInitialTweets();
 
       });
 
