@@ -7,7 +7,6 @@
     <script src="moment.min.js"></script>
   </head>
   <body>
-    <div class="user-popup"></div>
     <div class="header">
       <ul class="nav">
         <li>test 1</li>
@@ -20,7 +19,10 @@
 
     <div class="main">
       <div class="refresh">REFRESH DEM TWEETS</div>
-      <div class="userName"></div>
+      <div class="userName">
+        <span></span>
+        <img src="glyphicons_207_remove_2.png" alt="Remove User Filter" width="32" height="32">
+      </div>
       <div class="tweets"></div>
     </div>
 
@@ -83,15 +85,29 @@
             index += 1;
           } 
           displayTweets(); 
-        }  
+        };  
 
         function showUserTweets(user) {
           //clear fade and delete tweets
           $(".tweet").fadeOut("fast", function() {
             $(".tweets").empty();
+            $(".refresh").hide();
+            $(".auto-update").fadeIn();
+            $(".userName").children("span").text("@"+user);
+            $(".userName").show();
             addTweets(user);
           });
-        }      
+        };     
+
+        function showAllTweets() {
+         $(".tweet").fadeOut("fast", function() {
+            $(".tweets").empty();
+            $(".userName").hide();
+            $(".refresh").show();
+            $(".auto-update").fadeOut();
+            addTweets();
+          });
+        };
 
         function refreshTweets() {
           addNewTweets();
@@ -115,7 +131,7 @@
 
         $('.refresh').on("click", refreshTweets);
         $(".auto-update").on("click", toggleAutoUpdate);
-
+        $(".userName").on("click", showAllTweets)
 
         addTweets();
 
