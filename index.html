@@ -18,7 +18,7 @@
     <div class="space"></div>
 
     <div class="main">
-      <div class="refresh">Refresh Tweets</div>
+      <div class="refresh">REFRESH DEM TWEETS</div>
       <div class="tweets">
       </div>
     </div>
@@ -29,6 +29,7 @@
 
       $(document).ready(function(){
         
+        var lastDisplayedIndex;
         var $tweets = $('.tweets');
 
         function buildTweet(theTweet) {
@@ -47,13 +48,33 @@
           return $tweet;
         };
 
-        <!-- Add iniital tweets to the page -->
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          buildTweet(tweet).appendTo($tweets);
-          index -= 1;
+        function addNewTweets (isFirstTime) {
+          var index = streams.home.length - 1;
+          var tempIndex = index;
+
+          while(index >= 0) {
+            var tweet = streams.home[index];
+            
+            if (!isFirstTime) { //if we're adding the newest tweets...
+              if (index > lastDisplayedIndex) {//only add the new tweets
+                buildTweet(tweet).prependTo($tweets);
+              }
+            } else { //if it's the first time keep it simple, add all
+              buildTweet(tweet).prependTo($tweets);
+            }
+            index -= 1;
+          }
+
+          lastDisplayedIndex = tempIndex;
+        };
+
+        function refreshTweets() {
+          addNewTweets(false);
         }
+
+        $('.refresh').on("click", refreshTweets);
+        
+        addNewTweets(true);
 
       });
 

@@ -1,6 +1,6 @@
 body {
 	font-family: Arial, sans-serif;
-	background:#FFF; 
+	background:#b4afb4; 
 	margin: 0;
 }
 
@@ -11,10 +11,11 @@ body {
 .header {
 	top: 0;
 	position: fixed;
-	background-color: #743466;
+	background-color: #45104d;
 	height:50px; width:100%; 
   	color:white;
   	margin-bottom: 10px;
+  	box-shadow: 0 4px 4px #808080;
   	z-index: 1;
 }
 
@@ -31,15 +32,18 @@ body {
 }
 
 .main .refresh {
-	background-color: #e1d6bb;
-	width: 700px;
+	background-color: #d4c9d6;
+	width: 600px;
 	height: 30px;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+	border-radius: 10px;
+	box-shadow: 2px 2px 10px #3f3a40;
+	font-size: 15px;
 }
 .main .refresh:hover {
-	background-color: #f0d492;
+	background-color: #d1bdd4;
 	}
 
 ul {
@@ -48,14 +52,39 @@ ul {
 }
 
 .tweets .tweet {
-	height: 100px;
-	width: 700px;
-	background-color: #eee6d4;
+	position: relative;
+	height: 120px;
+	width: 600px;
+	background-color: #f5eef6;
 	list-style-type: none;
 	margin: 10px 0 10px 0;
 	text-align: center;
 	margin-left: auto;
 	margin-right: auto;
+	box-shadow: 2px 2px 10px #3f3a40;
+	border-radius: 10px;
+}
+
+.user {
+	position: absolute;
+	left: 10px;
+	top: 10px;
+	font-size: 20px;
+	color: #6f5c71;
+	font-weight: bold;
+}
+
+.message {
+	position: absolute;
+	top: 45px;
+	left: 20px;
+}
+
+.timestamp {
+	font-size: 15px;
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
 }
 
 .footer {
