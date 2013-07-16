@@ -27,6 +27,30 @@ body {
 	margin-right: auto;
 }
 
+.auto-update {
+	position: absolute;
+	right: 10px;
+	width: 200px;
+	height: 30px;
+	text-align: center;
+	color: #000;
+	border-radius: 10px;
+	box-shadow: 2px 2px 10px #3f3a40;
+	font-size: 15px;
+}
+.disabled {
+	background-color: #d4c9d6;
+}
+.disabled:hover {
+	background-color: #ecc9f2;
+}
+.enabled {
+	background-color: #feb718;
+}
+.enabled:hover {
+	background-color: #ffcf15;	
+}
+
 .main {
 	padding: 20px;
 }
@@ -63,6 +87,7 @@ ul {
 	margin-right: auto;
 	box-shadow: 2px 2px 10px #3f3a40;
 	border-radius: 10px;
+	display: none;
 }
 
 .user {
