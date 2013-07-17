@@ -9,9 +9,9 @@
   <body>
     <div class="header">
     <ul class="nav">
-        <li>test 1</li>
-        <li>test 2</li>
-        <li>test 3</li>
+        <li class="logo">TWITTLER</li>
+        <li>SOME LINK</li>
+        <li>OTHER LINK</li>
       </ul>
       <div class="auto-update disabled">AUTO UPDATE MODE</div>
     </div>
@@ -45,21 +45,14 @@
         var $tweets = $('.tweets');
 
         function buildTweet(theTweet) {
-          var $tweet = $('<div class="tweet"></div>');
-          var $user = $('<div class="user"></div>');
-          var $message = $('<div class="message"></div>');
-          var $timestamp = $('<div class="timestamp"></div>');
+          var $tweet = $('<div class="tweet"><div class="user"></div><div class="message"></div><div class="timestamp"></div></div>');
           var momentTimestamp = moment(theTweet.created_at);
           var coolTimestamp = moment(momentTimestamp).fromNow();
-          $user.text('@' + theTweet.user)
-          $user.on("click", function() {
-            showUserTweets(theTweet.user);
-          });
-          $message.text(theTweet.message);
-          $timestamp.text(coolTimestamp);
-          $user.appendTo($tweet);
-          $message.appendTo($tweet);
-          $timestamp.appendTo($tweet);
+          $tweet
+            .find(".user").text('@' + theTweet.user)
+            .on("click", function() { showUserTweets(theTweet.user) })            
+            .next().text(theTweet.message)
+            .next().text(coolTimestamp);
           return $tweet;
         };
 
@@ -78,7 +71,7 @@
             }
             index -= 1;
           }
-          $(".tweet").fadeIn("fast"); //tweets initially set to display:none
+          //$(".tweet").fadeIn("fast"); //tweets initially set to display:none
         };
 
         function addNewTweets() {
@@ -91,29 +84,29 @@
             lastDisplayedIndex = index;
             index += 1;
           } 
-          displayTweets(); 
+          //displayTweets(); 
         };  
 
         function showUserTweets(user) {
           //clear fade and delete tweets
-          $(".tweet").fadeOut("fast", function() {
+          //$(".tweet").fadeOut("fast", function() {
             $(".tweets").empty();
             $(".refresh").hide();
             $(".auto-update").fadeOut();
             $(".userName").children("span").text("@"+user);
             $(".userName").show();
             addTweets(user);
-          });
+          //});
         };     
 
         function showAllTweets() {
-         $(".tweet").fadeOut("fast", function() {
+         //$(".tweet").fadeOut("fast", function() {
             $(".tweets").empty();
             $(".userName").hide();
             $(".refresh").show();
             $(".auto-update").fadeIn();
             addTweets();
-          });
+        //  });
         };
 
         function refreshTweets() {
