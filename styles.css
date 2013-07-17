@@ -27,6 +27,20 @@ body {
 	margin-right: auto;
 }
 
+.compose {
+	position: absolute;
+	left: 10px;
+	width: 300px;
+	height: 200px;
+	padding:10px;
+	text-align: center;
+	color: #000;
+	border-radius: 10px;
+	box-shadow: 2px 2px 10px #3f3a40;
+	font-size: 15px;
+	background-color: #f5eef6;
+}
+
 .auto-update {
 	position: absolute;
 	right: 10px;

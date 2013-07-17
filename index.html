@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="header">
-      <ul class="nav">
+    <ul class="nav">
         <li>test 1</li>
         <li>test 2</li>
         <li>test 3</li>
@@ -18,6 +18,14 @@
     <div class="space"></div>
 
     <div class="main">
+      <div class="compose">
+        <h1>Compose ya'tweet!</h1>
+          <form>
+            Name: <input type="text" size="25" id="visitorInput"><br>
+            Tweet: <textarea type="text" cols="25" rows="3" id="messageInput"></textarea>
+          </form>
+          <button>Twittify!</button>
+      </div>
       <div class="refresh">REFRESH DEM TWEETS</div>
       <div class="userName">
         <span></span>
@@ -31,7 +39,6 @@
     <script>
 
       $(document).ready(function(){
-        
         var intervalID;
         var lastDisplayedIndex;
         var autoUpdateEnabled = false;
@@ -92,7 +99,7 @@
           $(".tweet").fadeOut("fast", function() {
             $(".tweets").empty();
             $(".refresh").hide();
-            $(".auto-update").fadeIn();
+            $(".auto-update").fadeOut();
             $(".userName").children("span").text("@"+user);
             $(".userName").show();
             addTweets(user);
@@ -104,7 +111,7 @@
             $(".tweets").empty();
             $(".userName").hide();
             $(".refresh").show();
-            $(".auto-update").fadeOut();
+            $(".auto-update").fadeIn();
             addTweets();
           });
         };
@@ -132,6 +139,14 @@
         $('.refresh').on("click", refreshTweets);
         $(".auto-update").on("click", toggleAutoUpdate);
         $(".userName").on("click", showAllTweets)
+
+        $(".compose").find("button").on("click", function() {
+          visitor = $("#visitorInput").val();
+          var message = $("#messageInput").val();
+          streams.users[visitor] = [];
+          writeTweet(message);
+          showAllTweets();
+        });
 
         addTweets();
 
